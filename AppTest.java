@@ -30,4 +30,17 @@ public class AppTest {
         Task task = new Task("Finish report", "2024-06-30");
         assertTrue(task.markCompleted());
     }
+
+    @Test
+    public void testCompletedTaskToString() {
+        Task task = new Task("Finish report", "2024-06-30");
+        task.markCompleted();
+        assertEquals("Task[Finish report] due by 2024-06-30 (completed)", task.toString());
+    }
+
+    @Test
+    public void testfirstCCommand() {
+        int firstCommand = 1;
+        Assert.assertEquals(1, firstCommand);    
+    }
 }

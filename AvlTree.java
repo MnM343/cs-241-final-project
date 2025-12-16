@@ -104,7 +104,7 @@ public class AvlTree<AnyType extends Comparable<AnyType>>
      * @param x the item to search for.
      * @return true if x is found.
      */
-    public boolean contains( String x )
+    public boolean contains( AnyType x )
     {
         return contains( x, root );
     }
@@ -242,7 +242,8 @@ public class AvlTree<AnyType extends Comparable<AnyType>>
      * @param t the node that roots the tree.
      * @return true if x is found in subtree.
      */
-    private boolean contains( String eventToSearch, AvlNode<AnyType> t )
+    //Gneneric contains method that uses the tree ordering (compareTo)
+    private boolean contains( AnyType x, AvlNode<AnyType> t )
     {
         /*while( root != null )
         {
@@ -260,7 +261,7 @@ public class AvlTree<AnyType extends Comparable<AnyType>>
         while( t != null )
         {
             AnyType e = ((AnyType)t.element);
-            int compareResult = eventToSearch.compareTo( e.getTitle() );
+            int compareResult = x.compareTo( t.element );
             
             if( compareResult < 0 )
                 t = t.left;
@@ -271,6 +272,32 @@ public class AvlTree<AnyType extends Comparable<AnyType>>
         }
 
         return false;   // No match
+    }
+
+    //title-based search (linear scan)
+    public boolean containsTitle( String title) {
+        return containsTitle( title, root );
+    }
+
+    private boolean containsTitle ( String title, AvlNode<AnyType> t) {
+        if (t == null) return false;
+        if (t.element instanceof Event && title.equals(((Event) t.element).getTitle()))
+            return true;
+        return containsTitle(title, t.left) || containsTitle(title, t.right);
+    }
+
+    //returns event with given title, or null if not found
+    public AnyType getByTitle (String title) {
+        return getByTitle(title, root);
+    }
+
+    private AnyType getByTitle(String title, AvlNode<AnyType> t) {
+        if (t == null) return null;
+        if (t.element instanceof Event && title.equals(((Event) t.element).getTitle()))
+            return t.element;
+        AnyType leftFound = getByTitle(title, t.left);
+        if (leftFound != null) return leftFound;
+        return getByTitle(title, t.right);
     }
 
     /**

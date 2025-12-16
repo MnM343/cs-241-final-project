@@ -12,7 +12,8 @@ public class Main {
         System.out.println("To start, here are some commands you can use. Type a number to execute one:");
         System.out.println("1. Add Event    2. View All Events    3. Search for Event    4. Delete Event    5. Tasks...    6. Exit");
         firstCommand = scanner.nextInt();
-
+    
+        
         while (true) {
             if (firstCommand == 1) {
                 System.out.println("Adding an event...");
@@ -35,21 +36,24 @@ public class Main {
                 // Further implementation for viewing events
                 eventTree.printTree();
             } else if (firstCommand == 3) {
-                //NOT WORKING RN
+                //I THINK ITS P GOOD RN
                 System.out.println("Searching for an event...");
-                // Further implementation for searching events (is there a way to search by title?)
+                // Further implementation for searching events
                 System.out.println("Please enter the title of the event you wish to search for.");
                 String eventToSearch = scanner.next();
-                eventTree.contains(eventToSearch);
-                //Note: The contains method would need to be modified to search by title specifically.
+                Event foundEvent = eventTree.getByTitle(eventToSearch);
+                System.out.println("Search complete! The event you searched for:\n" + foundEvent);
                 //extra: implement a method (prolly by overloading) that searches by date  
 
             } else if (firstCommand == 4) {
-                //NOT WORKING RN
+                //IT WORKS IT REALLY WORKSSSS
                 System.out.println("Deleting an event...");
                 // Further implementation for deleting events
                 System.out.println("Please enter the title of the event you wish to delete.");
                 String eventToDelete = scanner.next();
+                Event foundEvent = eventTree.getByTitle(eventToDelete);
+                eventTree.remove(foundEvent);
+                System.out.println("Event " + foundEvent.getTitle() + " deleted!");
 
             } else if (firstCommand == 5) {
                 System.out.println("Entering task management...");
