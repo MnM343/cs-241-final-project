@@ -21,7 +21,7 @@
  */
 
 
-public class AvlTree<AnyType extends Comparable<? super AnyType>>
+public class AvlTree<AnyType extends Comparable<AnyType>>
 {
     /**
      * Construct the tree.
@@ -104,7 +104,7 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>>
      * @param x the item to search for.
      * @return true if x is found.
      */
-    public boolean contains( AnyType x )
+    public boolean contains( String x )
     {
         return contains( x, root );
     }
@@ -242,11 +242,25 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>>
      * @param t the node that roots the tree.
      * @return true if x is found in subtree.
      */
-    private boolean contains( AnyType x, AvlNode<AnyType> t )
+    private boolean contains( String eventToSearch, AvlNode<AnyType> t )
     {
+        /*while( root != null )
+        {
+            
+            
+            if( compareResult < 0 )
+                t = t.left;
+            else if( compareResult > 0 )
+                t = t.right;
+            else
+                return true;    // Match
+        }
+
+        return false;   // No matc */
         while( t != null )
         {
-            int compareResult = x.compareTo( t.element );
+            AnyType e = ((AnyType)t.element);
+            int compareResult = eventToSearch.compareTo( e.getTitle() );
             
             if( compareResult < 0 )
                 t = t.left;
