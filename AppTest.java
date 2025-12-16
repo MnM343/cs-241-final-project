@@ -46,8 +46,33 @@ public class AppTest {
     }
 
     @Test
-    public void testfirstCCommand() {
+    public void testfirstCommand() {
         int firstCommand = 1;
         Assert.assertEquals(1, firstCommand);    
+    }
+
+    @Test
+    public void testtaskCommand() {
+        int taskCommand = 2;
+        Assert.assertEquals(2, taskCommand);    
+    }
+
+    @Test
+    public void testGetByTitle() {
+        AvlTree<Event> eventTree = new AvlTree<>();
+        Event event = new Event("Birthday", "30-06-2025", "Home", "N/A");
+        eventTree.insert(event);
+        Event foundEvent = eventTree.getByTitle(event.getTitle());
+        Assert.assertEquals(event, foundEvent);
+    }
+
+    @Test
+    public void testRemoveEvent() {
+        AvlTree<Event> eventTree = new AvlTree<>();
+        Event event = new Event("Anniversary", "15-08-2024", "Restaurant", "Dinner reservation");
+        eventTree.insert(event);
+        eventTree.remove(event);
+        Event foundEvent = eventTree.getByTitle(event.getTitle());
+        Assert.assertNull(foundEvent);
     }
 }
