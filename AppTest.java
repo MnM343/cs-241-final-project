@@ -20,6 +20,13 @@ public class AppTest {
     }
 
     @Test
+    public void testEventToString() {
+        Event event = new Event("Meeting", "2024-07-01", "Office", "Discuss project status");
+        String expected = "Event Title: Meeting\nDate: 2024-07-01\nLocation: Office\nNotes: Discuss project status";
+        assertEquals(expected, event.toString());
+    }
+
+    @Test
     public void testTaskCreation() {
         Task task = new Task("Finish report", "2024-06-30");
         assertEquals("Task[Finish report] due by 2024-06-30 (not completed)", task.toString());
